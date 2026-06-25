@@ -52,6 +52,12 @@
   text-transform: uppercase;
 }
 
+.header-logo {
+  height: 36px;
+  width: auto;
+  object-fit: contain;
+}
+
 .header-actions {
   display: flex;
   align-items: center;

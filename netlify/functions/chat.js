@@ -22,7 +22,8 @@ ${
   ctx.pendingCheckin
     ? `\nPENDING CHECK-IN: There is an unanswered check-in for ${ctx.pendingCheckin.date}. At a natural point in the conversation, ask how yesterday went — did they hit their calorie goal${ctx.pendingCheckin.workoutPrescribed ? ", and did they get their workout in" : ""}? Once you have clear answers, call submit_checkin.`
     : ""
-}`
+}
+IMPORTANT: This user's plan is already set up. NEVER call set_goal again. To change calories or meals, call update_nutrition. To change training days or equipment, call update_training. Make targeted changes only — don't ask them to re-enter information you already have.`
     : `This is a NEW USER. You need to collect their info to set up their plan. Ask one or two things at a time — don't fire all questions at once. You need:
 1. First name
 2. Current weight in lbs
@@ -59,7 +60,7 @@ const TOOLS = [
   {
     name: "set_goal",
     description:
-      "Call this once you have collected all onboarding info (name, current weight, goal weight, meals per day, training days, equipment, and optionally liked/avoided foods) and are ready to create the user's plan.",
+      "Call this ONLY for first-time setup — when the user has NO existing plan. Once a plan exists, use update_nutrition or update_training instead. Never call set_goal again for an existing user.",
     input_schema: {
       type: "object",
       properties: {
