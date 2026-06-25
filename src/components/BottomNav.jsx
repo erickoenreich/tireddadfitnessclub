@@ -1,13 +1,10 @@
-import { LuHouse, LuTarget, LuUtensilsCrossed, LuDumbbell, LuFootprints, LuMoon, LuTrendingUp, LuSettings } from "react-icons/lu";
+import { LuHouse, LuTarget, LuUtensilsCrossed, LuDumbbell, LuSettings } from "react-icons/lu";
 
 const TABS = [
-  { id: "home", label: "Home", Icon: LuHouse },
-  { id: "goals", label: "Goals", Icon: LuTarget },
-  { id: "meals", label: "Meals", Icon: LuUtensilsCrossed },
-  { id: "workout", label: "Train", Icon: LuDumbbell },
-  { id: "steps", label: "Steps", Icon: LuFootprints },
-  { id: "sleep", label: "Sleep", Icon: LuMoon },
-  { id: "progress", label: "Stats", Icon: LuTrendingUp },
+  { id: "home",     label: "Home",     Icon: LuHouse },
+  { id: "goals",    label: "Goals",    Icon: LuTarget },
+  { id: "meals",    label: "Meals",    Icon: LuUtensilsCrossed },
+  { id: "workout",  label: "Train",    Icon: LuDumbbell },
   { id: "settings", label: "Settings", Icon: LuSettings },
 ];
 

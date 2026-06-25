@@ -7,9 +7,6 @@ import Coach from "./components/Coach";
 import Goals from "./components/Goals";
 import MealPlanner from "./components/MealPlanner";
 import WorkoutGenerator from "./components/WorkoutGenerator";
-import StepsTracker from "./components/StepsTracker";
-import SleepTracker from "./components/SleepTracker";
-import Progress from "./components/Progress";
 import Settings from "./components/Settings";
 import Paywall from "./components/Paywall";
 import "./App.css";
@@ -29,12 +26,9 @@ export default function App() {
         />
 
         {tab === "home"     && <Coach state={state} actions={actions} />}
-        {tab === "goals"    && <Goals state={state} derived={derived} actions={actions} />}
+        {tab === "goals"    && <Goals state={state} derived={derived} actions={actions} helpers={helpers} />}
         {tab === "meals"    && <MealPlanner state={state} actions={actions} />}
         {tab === "workout"  && <WorkoutGenerator actions={actions} />}
-        {tab === "steps"    && <StepsTracker state={state} derived={derived} actions={actions} helpers={helpers} />}
-        {tab === "sleep"    && <SleepTracker state={state} derived={derived} actions={actions} helpers={helpers} />}
-        {tab === "progress" && <Progress state={state} derived={derived} actions={actions} />}
         {tab === "settings"  && <Settings state={state} actions={actions} />}
 
         <BottomNav active={tab} onChange={setTab} />
