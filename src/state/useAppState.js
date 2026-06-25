@@ -279,6 +279,44 @@ export function useAppState() {
     setState((s) => ({ ...s, lastCheckinAskDate: todayStr() }));
   }, []);
 
+  // Adjust nutrition plan — can change calories and/or meals per day.
+  const updateNutrition = useCallback((calorieAdjustment, mealsPerDay) => {
+    setState((s) => {
+      if (!s.weightLossGoal) return s;
+      const newCals = Math.max(1200, s.weightLossGoal.calorieGoal + (calorieAdjustment || 0));
+      const gw = s.goalWeight;
+      const proteinG = Math.round(gw * 1.25);
+      const carbsG = Math.round(newCals / 10);
+      const fatG = Math.round(Math.max(0, newCals - proteinG * 4 - carbsG * 4) / 9 * 10) / 10;
+      return {
+        ...s,
+        weightLossGoal: {
+          ...s.weightLossGoal,
+          calorieGoal: Math.round(newCals),
+          proteinG,
+          carbsG,
+          fatG,
+          ...(mealsPerDay ? { mealsPerDay } : {}),
+        },
+      };
+    });
+  }, []);
+
+  // Adjust training plan — can change days per week and/or equipment.
+  const updateTraining = useCallback((trainingDaysPerWeek, equipment) => {
+    setState((s) => {
+      if (!s.weightLossGoal) return s;
+      return {
+        ...s,
+        weightLossGoal: {
+          ...s.weightLossGoal,
+          ...(trainingDaysPerWeek != null ? { trainingDaysPerWeek } : {}),
+          ...(equipment ? { equipment } : {}),
+        },
+      };
+    });
+  }, []);
+
   const lastNDays = useCallback((log, n, fallback = 0) => {
     const labels = [];
     const values = [];
@@ -335,6 +373,8 @@ export function useAppState() {
       clearChat,
       setUserName,
       markCheckinAsked,
+      updateNutrition,
+      updateTraining,
     },
     helpers: { lastNDays, todayStr, daysAgoStr },
   };

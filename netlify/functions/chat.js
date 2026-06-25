@@ -113,6 +113,54 @@ const TOOLS = [
       required: ["hitCalorieGoal"],
     },
   },
+  {
+    name: "update_nutrition",
+    description:
+      "Adjust the user's nutrition plan based on their feedback — e.g. they're too hungry, losing too fast or slow, or want to change how many meals they eat. Call this when they ask to tweak their diet plan.",
+    input_schema: {
+      type: "object",
+      properties: {
+        calorieAdjustment: {
+          type: "number",
+          description: "Amount to add or subtract from daily calories (e.g. 200 to add 200, -100 to cut 100). Omit if not changing calories.",
+        },
+        mealsPerDay: {
+          type: "number",
+          enum: [2, 3, 4],
+          description: "New meals per day. Omit if not changing.",
+        },
+        reason: {
+          type: "string",
+          description: "Brief reason for the change, e.g. 'too hungry' or 'plateau'",
+        },
+      },
+      required: ["reason"],
+    },
+  },
+  {
+    name: "update_training",
+    description:
+      "Adjust the user's training plan based on their feedback — e.g. they want more or fewer training days, or their equipment situation changed.",
+    input_schema: {
+      type: "object",
+      properties: {
+        trainingDaysPerWeek: {
+          type: "number",
+          description: "New number of training days per week. Omit if not changing.",
+        },
+        equipment: {
+          type: "array",
+          items: { type: "string", enum: ["bodyweight", "dumbbells", "bands", "gym"] },
+          description: "Updated equipment list. Omit if not changing.",
+        },
+        reason: {
+          type: "string",
+          description: "Brief reason for the change",
+        },
+      },
+      required: ["reason"],
+    },
+  },
 ];
 
 async function callClaude(apiKey, system, messages) {

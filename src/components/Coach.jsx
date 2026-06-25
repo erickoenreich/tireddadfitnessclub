@@ -65,6 +65,22 @@ function handleAction(action, actions) {
         hitCalorieGoal: action.data.hitCalorieGoal,
       });
       return "✓ Check-in recorded";
+    case "update_nutrition": {
+      const { calorieAdjustment, mealsPerDay } = action.data;
+      actions.updateNutrition(calorieAdjustment || 0, mealsPerDay || null);
+      const parts = [];
+      if (calorieAdjustment) parts.push(`calories ${calorieAdjustment > 0 ? "+" : ""}${calorieAdjustment}`);
+      if (mealsPerDay) parts.push(`${mealsPerDay} meals/day`);
+      return `✓ Nutrition updated: ${parts.join(", ")} — check Goals tab`;
+    }
+    case "update_training": {
+      const { trainingDaysPerWeek, equipment } = action.data;
+      actions.updateTraining(trainingDaysPerWeek ?? null, equipment ?? null);
+      const parts = [];
+      if (trainingDaysPerWeek) parts.push(`${trainingDaysPerWeek} days/week`);
+      if (equipment) parts.push(equipment.join(", "));
+      return `✓ Training updated: ${parts.join(", ")} — check Workout tab`;
+    }
     default:
       return null;
   }
