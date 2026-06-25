@@ -536,6 +536,11 @@ input[type="range"] { flex: 1; }
 .bubble-text.thinking span:nth-child(2) { animation-delay: 0.18s; }
 .bubble-text.thinking span:nth-child(3) { animation-delay: 0.36s; }
 
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
 @keyframes eric-bounce {
   0%, 60%, 100% { transform: translateY(0); opacity: 0.6; }
   30% { transform: translateY(-5px); opacity: 1; }

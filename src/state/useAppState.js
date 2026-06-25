@@ -90,6 +90,10 @@ function defaultState() {
     // Tracks whether the check-in question has already been injected into
     // chat today so we don't repeat it on every page load.
     lastCheckinAskDate: null,
+    // Oura Ring integration
+    ouraAccessToken: null,
+    ouraRefreshToken: null,
+    ouraData: null,
   };
 }
 
@@ -279,6 +283,14 @@ export function useAppState() {
     setState((s) => ({ ...s, lastCheckinAskDate: todayStr() }));
   }, []);
 
+  const setOuraTokens = useCallback((accessToken, refreshToken) => {
+    setState((s) => ({ ...s, ouraAccessToken: accessToken, ouraRefreshToken: refreshToken }));
+  }, []);
+
+  const setOuraData = useCallback((data) => {
+    setState((s) => ({ ...s, ouraData: data }));
+  }, []);
+
   // Adjust nutrition plan — can change calories and/or meals per day.
   const updateNutrition = useCallback((calorieAdjustment, mealsPerDay) => {
     setState((s) => {
@@ -375,6 +387,8 @@ export function useAppState() {
       markCheckinAsked,
       updateNutrition,
       updateTraining,
+      setOuraTokens,
+      setOuraData,
     },
     helpers: { lastNDays, todayStr, daysAgoStr },
   };
