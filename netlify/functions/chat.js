@@ -6,11 +6,18 @@
 function buildSystemPrompt(ctx) {
   const onboarded = ctx.onboardingComplete;
 
+  const mealPlanSection = ctx.mealPlan
+    ? "\nToday's meal plan:\n" +
+      ctx.mealPlan
+        .map((m) => `- ${m.slot}: ${m.name} (${m.calories} cal, ${m.protein}g protein) — ${m.servings.join(", ")}`)
+        .join("\n")
+    : "";
+
   const userSection = onboarded
     ? `Name: ${ctx.userName || "this user"}
 Goal: ${ctx.goalSummary}
 Current streak: ${ctx.streak} days
-Today: ${ctx.todayDate}
+Today: ${ctx.todayDate}${mealPlanSection}
 ${
   ctx.pendingCheckin
     ? `\nPENDING CHECK-IN: There is an unanswered check-in for ${ctx.pendingCheckin.date}. At a natural point in the conversation, ask how yesterday went — did they hit their calorie goal${ctx.pendingCheckin.workoutPrescribed ? ", and did they get their workout in" : ""}? Once you have clear answers, call submit_checkin.`

@@ -1,4 +1,5 @@
 import { useState, useRef, useEffect } from "react";
+import { generateMealPlan } from "../data/foods";
 import { LuSend, LuRotateCcw } from "react-icons/lu";
 
 // Eric's opening message — shown instantly on first launch, no API call.
@@ -88,6 +89,30 @@ function handleAction(action, actions) {
 
 function buildApiContext(state) {
   const g = state.weightLossGoal;
+
+  let mealPlan = null;
+  if (g) {
+    try {
+      const plan = generateMealPlan({
+        calorieGoal: g.calorieGoal,
+        diet: "high-protein",
+        schedule: "quick",
+        avoid: g.avoidFoods || [],
+        prefer: g.likedFoods || [],
+        mealsPerDay: g.mealsPerDay,
+      });
+      mealPlan = plan.meals.map((m) => ({
+        slot: m.slot,
+        name: m.name,
+        calories: m.calories,
+        protein: m.protein,
+        servings: m.servings,
+      }));
+    } catch {
+      mealPlan = null;
+    }
+  }
+
   return {
     userName: state.userName || null,
     onboardingComplete: !!g,
@@ -97,6 +122,7 @@ function buildApiContext(state) {
     streak: state.streak,
     todayDate: new Date().toISOString().slice(0, 10),
     pendingCheckin: state.pendingCheckin || null,
+    mealPlan,
   };
 }
 
