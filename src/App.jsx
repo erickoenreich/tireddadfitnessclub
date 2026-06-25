@@ -10,6 +10,7 @@ import WorkoutGenerator from "./components/WorkoutGenerator";
 import StepsTracker from "./components/StepsTracker";
 import SleepTracker from "./components/SleepTracker";
 import Progress from "./components/Progress";
+import Settings from "./components/Settings";
 import Paywall from "./components/Paywall";
 import "./App.css";
 
@@ -34,6 +35,7 @@ export default function App() {
         {tab === "steps"    && <StepsTracker state={state} derived={derived} actions={actions} helpers={helpers} />}
         {tab === "sleep"    && <SleepTracker state={state} derived={derived} actions={actions} helpers={helpers} />}
         {tab === "progress" && <Progress state={state} derived={derived} actions={actions} />}
+        {tab === "settings"  && <Settings state={state} actions={actions} />}
 
         <BottomNav active={tab} onChange={setTab} />
 

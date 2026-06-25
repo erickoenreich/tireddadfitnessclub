@@ -1,4 +1,4 @@
-import { LuHouse, LuTarget, LuUtensilsCrossed, LuDumbbell, LuFootprints, LuMoon, LuTrendingUp } from "react-icons/lu";
+import { LuHouse, LuTarget, LuUtensilsCrossed, LuDumbbell, LuFootprints, LuMoon, LuTrendingUp, LuSettings } from "react-icons/lu";
 
 const TABS = [
   { id: "home", label: "Home", Icon: LuHouse },
@@ -8,6 +8,7 @@ const TABS = [
   { id: "steps", label: "Steps", Icon: LuFootprints },
   { id: "sleep", label: "Sleep", Icon: LuMoon },
   { id: "progress", label: "Stats", Icon: LuTrendingUp },
+  { id: "settings", label: "Settings", Icon: LuSettings },
 ];
 
 export default function BottomNav({ active, onChange }) {

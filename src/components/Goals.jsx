@@ -1,5 +1,4 @@
 import { useState } from "react";
-import OuraConnect from "./OuraConnect";
 import { computeWeightLossTargets } from "../data/goals";
 import { generateMealPlan, parseFoodList, MEALS_PER_DAY_OPTIONS } from "../data/foods";
 import { EQUIPMENT_OPTIONS } from "../data/exercises";
@@ -136,7 +135,6 @@ export default function Goals({ state, derived, actions, onboarding = false, onC
           </div>
         </>
       )}
-      <OuraConnect state={state} actions={actions} />
     </div>
   );
 }

@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
-import { LuRefreshCw, LuUnlink } from "react-icons/lu";
-import { SiOura } from "react-icons/si";
+import { LuRefreshCw, LuUnlink, LuCircleDot } from "react-icons/lu";
 
 const OURA_CLIENT_ID = import.meta.env.VITE_OURA_CLIENT_ID;
 const REDIRECT_URI = window.location.origin;
@@ -78,7 +77,7 @@ export default function OuraConnect({ state, actions }) {
     <div className="card">
       <div className="row-between" style={{ marginBottom: connected ? 12 : 0 }}>
         <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
-          <SiOura style={{ fontSize: 18, color: "var(--text)" }} aria-hidden="true" />
+          <LuCircleDot style={{ fontSize: 18, color: "var(--text)" }} aria-hidden="true" />
           <span style={{ fontWeight: 700, fontSize: 14 }}>Oura Ring</span>
           {connected && (
             <span style={{ fontSize: 11, color: "var(--success)", background: "var(--success-bg)", borderRadius: 999, padding: "2px 8px" }}>
