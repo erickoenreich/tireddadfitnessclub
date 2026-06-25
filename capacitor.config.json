@@ -1,0 +1,8 @@
+{
+  "appId": "club.tireddadfitness.app",
+  "appName": "Tired Dad Fitness Club",
+  "webDir": "dist",
+  "server": {
+    "androidScheme": "https"
+  }
+}
